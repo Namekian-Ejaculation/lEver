@@ -37,7 +37,7 @@ public class Roll extends BaseCommand {
 			}
 		}
 		
-		String personaName = ps.getName();
+		String personaName = ps.getDisplayName();
 		String message = GRAY + personaName + DARK_AQUA + " has rolled a " + GRAY + roll[1]
 				+ DARK_AQUA + " out of " + GRAY + input;
 		Bukkit.getOnlinePlayers().stream()

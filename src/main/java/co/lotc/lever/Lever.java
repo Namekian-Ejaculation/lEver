@@ -5,6 +5,7 @@ import co.lotc.core.bukkit.util.Run;
 import co.lotc.core.bukkit.util.WeakBlock;
 import co.lotc.core.command.CommandTemplate;
 import co.lotc.lever.cmd.*;
+import co.lotc.lever.listener.FallDamageListener;
 import co.lotc.lever.listener.LeverListener;
 import co.lotc.lever.listener.SneakToggleListener;
 import co.lotc.lever.listener.WarpSignListener;
@@ -100,6 +101,7 @@ public class Lever extends JavaPlugin {
 	}
 	
 	private void listeners() {
+		Bukkit.getPluginManager().registerEvents(new FallDamageListener(), this);
 		Bukkit.getPluginManager().registerEvents(new LeverListener(), this);
 		Bukkit.getPluginManager().registerEvents(new SneakToggleListener(this), this);
 		Bukkit.getPluginManager().registerEvents(new WarpSignListener(this), this);

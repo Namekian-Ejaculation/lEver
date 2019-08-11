@@ -1,14 +1,14 @@
 package co.lotc.lever.cmd;
 
+import co.lotc.core.bukkit.util.Run;
 import co.lotc.core.command.annotate.Cmd;
 import co.lotc.lever.BaseCommand;
 import co.lotc.lever.Lever;
+import co.lotc.lever.listener.FallDamageListener;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -72,7 +72,8 @@ public class Vanish extends BaseCommand {
 		p.setInvulnerable(false);
 		p.setAllowFlight(false);
 		p.removeMetadata("vanished", Lever.get());
-		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 120, 4));
+		FallDamageListener.negateFallDamage.add(p);
+		Run.as(Lever.get()).delayed(80L, () -> FallDamageListener.negateFallDamage.remove(p));
 	}
 	
 	public static void maybeHide(Player who, Player from) {

@@ -1,14 +1,14 @@
 package co.lotc.lever.cmd;
 
+import co.lotc.core.bukkit.util.Run;
 import co.lotc.core.command.annotate.Cmd;
 import co.lotc.core.command.annotate.Default;
 import co.lotc.lever.BaseCommand;
+import co.lotc.lever.listener.FallDamageListener;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.stream.Collectors;
 
@@ -22,7 +22,8 @@ public class Fly extends BaseCommand {
 		
 		if(target.getAllowFlight()) target.sendMessage(GREEN + "You are now flying");
 		else {
-			target.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 120, 4));
+			FallDamageListener.negateFallDamage.add(target);
+			Run.as(plugin).delayed(80L, () -> FallDamageListener.negateFallDamage.remove(target));
 			target.sendMessage(LIGHT_PURPLE + "You are no longer flying");
 		}
 

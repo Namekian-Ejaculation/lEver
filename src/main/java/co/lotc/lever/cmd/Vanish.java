@@ -7,6 +7,8 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -70,6 +72,7 @@ public class Vanish extends BaseCommand {
 		p.setInvulnerable(false);
 		p.setAllowFlight(false);
 		p.removeMetadata("vanished", Lever.get());
+		p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 120, 4));
 	}
 	
 	public static void maybeHide(Player who, Player from) {

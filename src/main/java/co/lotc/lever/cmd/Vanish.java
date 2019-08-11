@@ -64,11 +64,11 @@ public class Vanish extends BaseCommand {
 	
 	
 	public static void deactivate(Player p) {
+		p.setGlowing(false);
 		Bukkit.getOnlinePlayers().stream().filter(x->x!=p).forEach(x->x.showPlayer(Lever.get(), p));
 		VANISHED.remove(p.getUniqueId());
 		p.setInvulnerable(false);
 		p.setAllowFlight(false);
-		p.setGlowing(false);
 		p.removeMetadata("vanished", Lever.get());
 	}
 	
